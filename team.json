@@ -1,0 +1,27 @@
+{
+  "team_number": "T0081",
+  "group_lead": {
+    "name": "Deepanshu",
+    "enrollment_no": "2501010654",
+    "github": "deepanshu92110-collab"
+  },
+  "members": [
+    {
+      "name": "Shine",
+      "enrollment_no": "2501010670",
+      "github": "shinyore"
+    },
+    {
+      "name": "Mayank",
+      "enrollment_no": "2501010706",
+      "github": "mayankdahiya0707-code"
+    },
+    {
+      "name": "Ritesh Verma",
+      "enrollment_no": "2501010711",
+      "github": "itsriteshverma-oku"
+    }
+  ],
+  "postgres_version": "",
+  "laptop_used_for_benchmarks": "Macbook Pro M4"
+}
