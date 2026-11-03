@@ -22,12 +22,16 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead | Deepanshu | 2501010654 | deepanshu92110-collab |
+| Member 2 | Shine | 2501010670 | shinyore |
+| Member 3 | Mayank | 2501010706 | mayankdahiya0707-code |
+| Member 4 | Ritesh Verma | 2501010711 | itsriteshverma-oku |
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
+**Team Number:** T0081
+
+**Section:** A,C
+
+**Repository URL:** https://github.com/deepanshu92110-collab/skillbridgeai_de_2026
 
 ---
 
