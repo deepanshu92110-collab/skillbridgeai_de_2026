@@ -1,0 +1,97 @@
+erDiagram
+    cities {
+        integer city_id PK
+        text city_name UK
+        text state
+        numeric base_fare "precision 8,2"
+        numeric per_km_rate "precision 8,2"
+        numeric per_min_rate "precision 8,2"
+        date launched_on
+    }
+    riders {
+        integer rider_id PK
+        text full_name
+        text email UK
+        text phone UK
+        integer home_city_id FK
+        date signup_date
+        numeric rider_rating "precision 2,1; nullable"
+        boolean is_active
+    }
+    drivers {
+        integer driver_id PK
+        text full_name
+        text phone UK
+        text license_no UK
+        integer city_id FK
+        date joined_on
+        numeric driver_rating "precision 2,1"
+        text status
+    }
+    vehicles {
+        integer vehicle_id PK
+        integer driver_id FK
+        text registration_no UK
+        text make
+        text model
+        smallint manufacture_year
+        text vehicle_type
+        smallint seat_capacity
+    }
+    promo_codes {
+        text promo_code PK
+        numeric discount_pct "precision 5,2"
+        numeric max_discount "precision 8,2"
+        date valid_from
+        date valid_to
+        boolean is_active
+    }
+    trips {
+        integer trip_id PK
+        integer rider_id FK
+        integer driver_id FK "nullable"
+        integer vehicle_id FK "nullable"
+        integer city_id FK
+        text promo_code FK "nullable"
+        timestamptz requested_at
+        timestamptz pickup_at "nullable"
+        timestamptz dropoff_at "nullable"
+        numeric pickup_lat "precision 9,6"
+        numeric pickup_lng "precision 9,6"
+        numeric drop_lat "precision 9,6"
+        numeric drop_lng "precision 9,6"
+        numeric distance_km "precision 8,2; nullable"
+        smallint duration_min "nullable"
+        numeric surge_multiplier "precision 4,2"
+        numeric fare_amount "precision 10,2; nullable"
+        text status
+    }
+    payments {
+        integer payment_id PK
+        integer trip_id FK
+        numeric amount "precision 10,2"
+        text method
+        text payment_status
+        timestamptz paid_at
+    }
+    ratings {
+        integer trip_id PK, FK
+        text rated_by PK
+        smallint stars
+        text comment "nullable"
+        timestamptz created_at
+    }
+
+    cities ||--o{ riders : home_city
+    cities ||--o{ drivers : listed_city
+    cities ||--o{ trips : trip_city
+    riders ||--o{ trips : requests
+    drivers ||--o{ vehicles : registered_to
+    drivers o|--o{ trips : assigned_driver
+    vehicles o|--o{ trips : assigned_vehicle
+    promo_codes o|--o{ trips : applied_to
+    trips ||--o{ payments : payment_records
+    trips ||--o{ ratings : receives_ratings
+
+%% RATINGS are limited to zero, one, or two rows per trip by the composite
+%% primary key (trip_id, rated_by); one per reviewer role at most.
