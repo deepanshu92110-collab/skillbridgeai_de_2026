@@ -1,0 +1,33 @@
+=== W03 run 1 ===
+Update on drivers  (cost=0.00..82.00 rows=0 width=0) (actual time=5.906..5.907 rows=0.00 loops=1)
+  Buffers: shared hit=5152 read=45 dirtied=93 written=7
+  ->  Seq Scan on drivers  (cost=0.00..82.00 rows=394 width=38) (actual time=0.007..0.203 rows=389.00 loops=1)
+        Filter: ((driver_rating < 3.5) AND (status = 'ACTIVE'::text))
+        Rows Removed by Filter: 2611
+        Buffers: shared hit=37
+Planning:
+  Buffers: shared hit=98
+Planning Time: 0.211 ms
+Execution Time: 5.953 ms
+=== W03 run 2 ===
+Update on drivers  (cost=0.00..93.07 rows=0 width=0) (actual time=3.627..3.627 rows=0.00 loops=1)
+  Buffers: shared hit=5949 dirtied=12 written=10
+  ->  Seq Scan on drivers  (cost=0.00..93.07 rows=447 width=38) (actual time=0.010..0.223 rows=389.00 loops=1)
+        Filter: ((driver_rating < 3.5) AND (status = 'ACTIVE'::text))
+        Rows Removed by Filter: 2611
+        Buffers: shared hit=42
+Planning:
+  Buffers: shared hit=98
+Planning Time: 0.177 ms
+Execution Time: 3.672 ms
+=== W03 run 3 ===
+Update on drivers  (cost=0.00..104.16 rows=0 width=0) (actual time=3.175..3.175 rows=0.00 loops=1)
+  Buffers: shared hit=6312 dirtied=7 written=7
+  ->  Seq Scan on drivers  (cost=0.00..104.16 rows=500 width=38) (actual time=0.010..0.229 rows=389.00 loops=1)
+        Filter: ((driver_rating < 3.5) AND (status = 'ACTIVE'::text))
+        Rows Removed by Filter: 2611
+        Buffers: shared hit=47
+Planning:
+  Buffers: shared hit=98
+Planning Time: 0.184 ms
+Execution Time: 3.221 ms

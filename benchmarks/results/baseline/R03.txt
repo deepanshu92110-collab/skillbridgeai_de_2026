@@ -1,0 +1,27 @@
+=== R03 run 1 ===
+Seq Scan on riders  (cost=0.00..823.00 rows=150 width=20) (actual time=1.782..8.207 rows=1.00 loops=1)
+  Filter: (lower(email) = 'karan.verma1042@mail.com'::text)
+  Rows Removed by Filter: 29999
+  Buffers: shared read=373
+Planning:
+  Buffers: shared hit=90 read=5
+Planning Time: 1.072 ms
+Execution Time: 8.227 ms
+=== R03 run 2 ===
+Seq Scan on riders  (cost=0.00..823.00 rows=150 width=20) (actual time=0.220..6.470 rows=1.00 loops=1)
+  Filter: (lower(email) = 'karan.verma1042@mail.com'::text)
+  Rows Removed by Filter: 29999
+  Buffers: shared hit=373
+Planning:
+  Buffers: shared hit=95
+Planning Time: 0.162 ms
+Execution Time: 6.484 ms
+=== R03 run 3 ===
+Seq Scan on riders  (cost=0.00..823.00 rows=150 width=20) (actual time=0.216..6.254 rows=1.00 loops=1)
+  Filter: (lower(email) = 'karan.verma1042@mail.com'::text)
+  Rows Removed by Filter: 29999
+  Buffers: shared hit=373
+Planning:
+  Buffers: shared hit=95
+Planning Time: 0.171 ms
+Execution Time: 6.268 ms

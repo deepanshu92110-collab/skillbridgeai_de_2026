@@ -1,0 +1,69 @@
+=== R21 run 1 ===
+Sort  (cost=10928.26..10928.36 rows=40 width=21) (actual time=19.618..19.619 rows=40.00 loops=1)
+  Sort Key: (count(t.trip_id)) DESC
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=5636
+  ->  HashAggregate  (cost=10926.80..10927.20 rows=40 width=21) (actual time=19.605..19.608 rows=40.00 loops=1)
+        Group Key: p.promo_code
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=5633
+        ->  Hash Right Join  (cost=1.90..9426.80 rows=300000 width=17) (actual time=0.031..18.332 rows=19973.00 loops=1)
+              Hash Cond: (t.promo_code = p.promo_code)
+              Buffers: shared hit=5633
+              ->  Seq Scan on trips t  (cost=0.00..8632.00 rows=300000 width=12) (actual time=0.004..8.526 rows=300000.00 loops=1)
+                    Buffers: shared hit=5632
+              ->  Hash  (cost=1.40..1.40 rows=40 width=13) (actual time=0.008..0.008 rows=40.00 loops=1)
+                    Buckets: 1024  Batches: 1  Memory Usage: 10kB
+                    Buffers: shared hit=1
+                    ->  Seq Scan on promo_codes p  (cost=0.00..1.40 rows=40 width=13) (actual time=0.002..0.004 rows=40.00 loops=1)
+                          Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=162 read=3
+Planning Time: 0.979 ms
+Execution Time: 19.666 ms
+=== R21 run 2 ===
+Sort  (cost=10928.26..10928.36 rows=40 width=21) (actual time=19.482..19.484 rows=40.00 loops=1)
+  Sort Key: (count(t.trip_id)) DESC
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=5636
+  ->  HashAggregate  (cost=10926.80..10927.20 rows=40 width=21) (actual time=19.471..19.474 rows=40.00 loops=1)
+        Group Key: p.promo_code
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=5633
+        ->  Hash Right Join  (cost=1.90..9426.80 rows=300000 width=17) (actual time=0.031..18.202 rows=19973.00 loops=1)
+              Hash Cond: (t.promo_code = p.promo_code)
+              Buffers: shared hit=5633
+              ->  Seq Scan on trips t  (cost=0.00..8632.00 rows=300000 width=12) (actual time=0.004..8.394 rows=300000.00 loops=1)
+                    Buffers: shared hit=5632
+              ->  Hash  (cost=1.40..1.40 rows=40 width=13) (actual time=0.008..0.008 rows=40.00 loops=1)
+                    Buckets: 1024  Batches: 1  Memory Usage: 10kB
+                    Buffers: shared hit=1
+                    ->  Seq Scan on promo_codes p  (cost=0.00..1.40 rows=40 width=13) (actual time=0.002..0.004 rows=40.00 loops=1)
+                          Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=165
+Planning Time: 0.239 ms
+Execution Time: 19.522 ms
+=== R21 run 3 ===
+Sort  (cost=10928.26..10928.36 rows=40 width=21) (actual time=19.593..19.595 rows=40.00 loops=1)
+  Sort Key: (count(t.trip_id)) DESC
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=5636
+  ->  HashAggregate  (cost=10926.80..10927.20 rows=40 width=21) (actual time=19.582..19.585 rows=40.00 loops=1)
+        Group Key: p.promo_code
+        Batches: 1  Memory Usage: 32kB
+        Buffers: shared hit=5633
+        ->  Hash Right Join  (cost=1.90..9426.80 rows=300000 width=17) (actual time=0.029..18.298 rows=19973.00 loops=1)
+              Hash Cond: (t.promo_code = p.promo_code)
+              Buffers: shared hit=5633
+              ->  Seq Scan on trips t  (cost=0.00..8632.00 rows=300000 width=12) (actual time=0.004..8.457 rows=300000.00 loops=1)
+                    Buffers: shared hit=5632
+              ->  Hash  (cost=1.40..1.40 rows=40 width=13) (actual time=0.007..0.008 rows=40.00 loops=1)
+                    Buckets: 1024  Batches: 1  Memory Usage: 10kB
+                    Buffers: shared hit=1
+                    ->  Seq Scan on promo_codes p  (cost=0.00..1.40 rows=40 width=13) (actual time=0.002..0.003 rows=40.00 loops=1)
+                          Buffers: shared hit=1
+Planning:
+  Buffers: shared hit=165
+Planning Time: 0.252 ms
+Execution Time: 19.632 ms

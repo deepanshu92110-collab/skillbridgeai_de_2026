@@ -1,0 +1,42 @@
+=== R10 run 1 ===
+Seq Scan on drivers d  (cost=9389.97..9471.97 rows=1354 width=20) (actual time=12.209..12.209 rows=0.00 loops=1)
+  Filter: ((NOT (ANY (driver_id = (hashed SubPlan 1).col1))) AND (status = 'ACTIVE'::text))
+  Rows Removed by Filter: 3000
+  Buffers: shared hit=5169 read=500
+  SubPlan 1
+    ->  Seq Scan on trips t  (cost=0.00..9382.00 rows=3189 width=4) (actual time=11.566..11.746 rows=3296.00 loops=1)
+          Filter: (requested_at >= '2026-06-25 00:00:00+05:30'::timestamp with time zone)
+          Rows Removed by Filter: 296704
+          Buffers: shared hit=5132 read=500
+Planning:
+  Buffers: shared hit=128
+Planning Time: 0.246 ms
+Execution Time: 12.236 ms
+=== R10 run 2 ===
+Seq Scan on drivers d  (cost=9389.97..9471.97 rows=1354 width=20) (actual time=12.138..12.138 rows=0.00 loops=1)
+  Filter: ((NOT (ANY (driver_id = (hashed SubPlan 1).col1))) AND (status = 'ACTIVE'::text))
+  Rows Removed by Filter: 3000
+  Buffers: shared hit=5263 read=406
+  SubPlan 1
+    ->  Seq Scan on trips t  (cost=0.00..9382.00 rows=3189 width=4) (actual time=11.514..11.697 rows=3296.00 loops=1)
+          Filter: (requested_at >= '2026-06-25 00:00:00+05:30'::timestamp with time zone)
+          Rows Removed by Filter: 296704
+          Buffers: shared hit=5226 read=406
+Planning:
+  Buffers: shared hit=128
+Planning Time: 0.237 ms
+Execution Time: 12.164 ms
+=== R10 run 3 ===
+Seq Scan on drivers d  (cost=9389.97..9471.97 rows=1354 width=20) (actual time=12.405..12.408 rows=0.00 loops=1)
+  Filter: ((NOT (ANY (driver_id = (hashed SubPlan 1).col1))) AND (status = 'ACTIVE'::text))
+  Rows Removed by Filter: 3000
+  Buffers: shared hit=5357 read=312
+  SubPlan 1
+    ->  Seq Scan on trips t  (cost=0.00..9382.00 rows=3189 width=4) (actual time=11.609..11.786 rows=3296.00 loops=1)
+          Filter: (requested_at >= '2026-06-25 00:00:00+05:30'::timestamp with time zone)
+          Rows Removed by Filter: 296704
+          Buffers: shared hit=5320 read=312
+Planning:
+  Buffers: shared hit=128
+Planning Time: 0.233 ms
+Execution Time: 12.440 ms

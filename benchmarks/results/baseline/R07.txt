@@ -1,0 +1,123 @@
+=== R07 run 1 ===
+Limit  (cost=9528.89..9528.91 rows=10 width=56) (actual time=10.718..11.425 rows=10.00 loops=1)
+  Buffers: shared hit=4310 read=1439
+  ->  Sort  (cost=9528.89..9536.39 rows=3000 width=56) (actual time=10.717..11.424 rows=10.00 loops=1)
+        Sort Key: (sum(t.fare_amount)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=4310 read=1439
+        ->  HashAggregate  (cost=9426.56..9464.06 rows=3000 width=56) (actual time=10.592..11.353 rows=480.00 loops=1)
+              Group Key: d.driver_id
+              Batches: 1  Memory Usage: 369kB
+              Buffers: shared hit=4307 read=1439
+              ->  Gather  (cost=1083.10..9395.64 rows=4123 width=22) (actual time=6.993..10.676 rows=6597.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=4307 read=1439
+                    ->  Hash Join  (cost=83.10..7983.34 rows=1718 width=22) (actual time=5.417..8.586 rows=2199.00 loops=3)
+                          Hash Cond: (t.driver_id = d.driver_id)
+                          Buffers: shared hit=4307 read=1439
+                          ->  Parallel Seq Scan on trips t  (cost=0.00..7819.50 rows=17180 width=10) (actual time=4.282..6.869 rows=13548.33 loops=3)
+                                Filter: ((requested_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-04-01 00:00:00+05:30'::timestamp with time zone) AND (status = 'COMPLETED'::text))
+                                Rows Removed by Filter: 86452
+                                Buffers: shared hit=4230 read=1402
+                          ->  Hash  (cost=79.35..79.35 rows=300 width=16) (actual time=1.126..1.126 rows=480.00 loops=3)
+                                Buckets: 1024  Batches: 1  Memory Usage: 31kB
+                                Buffers: shared hit=77 read=37
+                                ->  Hash Join  (cost=1.14..79.35 rows=300 width=16) (actual time=0.364..1.092 rows=480.00 loops=3)
+                                      Hash Cond: (d.city_id = c.city_id)
+                                      Buffers: shared hit=77 read=37
+                                      ->  Seq Scan on drivers d  (cost=0.00..67.00 rows=3000 width=20) (actual time=0.333..0.926 rows=3000.00 loops=3)
+                                            Buffers: shared hit=74 read=37
+                                      ->  Hash  (cost=1.12..1.12 rows=1 width=4) (actual time=0.025..0.025 rows=1.00 loops=3)
+                                            Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                            Buffers: shared hit=3
+                                            ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.021..0.022 rows=1.00 loops=3)
+                                                  Filter: (city_name = 'Mumbai'::text)
+                                                  Rows Removed by Filter: 9
+                                                  Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=256 read=10
+Planning Time: 1.590 ms
+Execution Time: 11.469 ms
+=== R07 run 2 ===
+Limit  (cost=9528.89..9528.91 rows=10 width=56) (actual time=11.692..12.477 rows=10.00 loops=1)
+  Buffers: shared hit=4629 read=1120
+  ->  Sort  (cost=9528.89..9536.39 rows=3000 width=56) (actual time=11.692..12.475 rows=10.00 loops=1)
+        Sort Key: (sum(t.fare_amount)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=4629 read=1120
+        ->  HashAggregate  (cost=9426.56..9464.06 rows=3000 width=56) (actual time=11.576..12.413 rows=480.00 loops=1)
+              Group Key: d.driver_id
+              Batches: 1  Memory Usage: 369kB
+              Buffers: shared hit=4626 read=1120
+              ->  Gather  (cost=1083.10..9395.64 rows=4123 width=22) (actual time=8.147..11.773 rows=6597.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=4626 read=1120
+                    ->  Hash Join  (cost=83.10..7983.34 rows=1718 width=22) (actual time=4.947..7.956 rows=2199.00 loops=3)
+                          Hash Cond: (t.driver_id = d.driver_id)
+                          Buffers: shared hit=4626 read=1120
+                          ->  Parallel Seq Scan on trips t  (cost=0.00..7819.50 rows=17180 width=10) (actual time=4.681..7.136 rows=13548.33 loops=3)
+                                Filter: ((requested_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-04-01 00:00:00+05:30'::timestamp with time zone) AND (status = 'COMPLETED'::text))
+                                Rows Removed by Filter: 86452
+                                Buffers: shared hit=4512 read=1120
+                          ->  Hash  (cost=79.35..79.35 rows=300 width=16) (actual time=0.255..0.255 rows=480.00 loops=3)
+                                Buckets: 1024  Batches: 1  Memory Usage: 31kB
+                                Buffers: shared hit=114
+                                ->  Hash Join  (cost=1.14..79.35 rows=300 width=16) (actual time=0.048..0.228 rows=480.00 loops=3)
+                                      Hash Cond: (d.city_id = c.city_id)
+                                      Buffers: shared hit=114
+                                      ->  Seq Scan on drivers d  (cost=0.00..67.00 rows=3000 width=20) (actual time=0.020..0.095 rows=3000.00 loops=3)
+                                            Buffers: shared hit=111
+                                      ->  Hash  (cost=1.12..1.12 rows=1 width=4) (actual time=0.022..0.022 rows=1.00 loops=3)
+                                            Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                            Buffers: shared hit=3
+                                            ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.017..0.017 rows=1.00 loops=3)
+                                                  Filter: (city_name = 'Mumbai'::text)
+                                                  Rows Removed by Filter: 9
+                                                  Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=266
+Planning Time: 0.450 ms
+Execution Time: 12.521 ms
+=== R07 run 3 ===
+Limit  (cost=9528.89..9528.91 rows=10 width=56) (actual time=9.760..10.547 rows=10.00 loops=1)
+  Buffers: shared hit=4779 read=970
+  ->  Sort  (cost=9528.89..9536.39 rows=3000 width=56) (actual time=9.759..10.546 rows=10.00 loops=1)
+        Sort Key: (sum(t.fare_amount)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=4779 read=970
+        ->  HashAggregate  (cost=9426.56..9464.06 rows=3000 width=56) (actual time=9.658..10.496 rows=480.00 loops=1)
+              Group Key: d.driver_id
+              Batches: 1  Memory Usage: 369kB
+              Buffers: shared hit=4776 read=970
+              ->  Gather  (cost=1083.10..9395.64 rows=4123 width=22) (actual time=6.296..9.871 rows=6597.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=4776 read=970
+                    ->  Hash Join  (cost=83.10..7983.34 rows=1718 width=22) (actual time=4.756..7.674 rows=2199.00 loops=3)
+                          Hash Cond: (t.driver_id = d.driver_id)
+                          Buffers: shared hit=4776 read=970
+                          ->  Parallel Seq Scan on trips t  (cost=0.00..7819.50 rows=17180 width=10) (actual time=4.459..6.846 rows=13548.33 loops=3)
+                                Filter: ((requested_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-04-01 00:00:00+05:30'::timestamp with time zone) AND (status = 'COMPLETED'::text))
+                                Rows Removed by Filter: 86452
+                                Buffers: shared hit=4662 read=970
+                          ->  Hash  (cost=79.35..79.35 rows=300 width=16) (actual time=0.281..0.281 rows=480.00 loops=3)
+                                Buckets: 1024  Batches: 1  Memory Usage: 31kB
+                                Buffers: shared hit=114
+                                ->  Hash Join  (cost=1.14..79.35 rows=300 width=16) (actual time=0.066..0.253 rows=480.00 loops=3)
+                                      Hash Cond: (d.city_id = c.city_id)
+                                      Buffers: shared hit=114
+                                      ->  Seq Scan on drivers d  (cost=0.00..67.00 rows=3000 width=20) (actual time=0.028..0.105 rows=3000.00 loops=3)
+                                            Buffers: shared hit=111
+                                      ->  Hash  (cost=1.12..1.12 rows=1 width=4) (actual time=0.028..0.028 rows=1.00 loops=3)
+                                            Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                            Buffers: shared hit=3
+                                            ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.021..0.022 rows=1.00 loops=3)
+                                                  Filter: (city_name = 'Mumbai'::text)
+                                                  Rows Removed by Filter: 9
+                                                  Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=266
+Planning Time: 0.421 ms
+Execution Time: 10.591 ms
