@@ -1,0 +1,42 @@
+=== W05 run 1 ===
+Delete on trips  (cost=0.29..165.25 rows=0 width=0) (actual time=2.703..2.704 rows=0.00 loops=1)
+  Buffers: shared hit=6654 read=10 dirtied=318
+  ->  Index Scan using trips_cancelled_requested_at_idx on trips  (cost=0.29..165.25 rows=3198 width=6) (actual time=0.026..0.549 rows=3165.00 loops=1)
+        Index Cond: (requested_at < ('2025-02-01 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+        Filter: (status ~~ 'CANCELLED%'::text)
+        Index Searches: 1
+        Buffers: shared hit=319 read=10
+Planning:
+  Buffers: shared hit=206
+Planning Time: 0.418 ms
+Trigger for constraint payments_trip_id_fkey: time=4.764 calls=3165
+Trigger for constraint ratings_trip_id_fkey: time=6.033 calls=3165
+Execution Time: 13.677 ms
+=== W05 run 2 ===
+Delete on trips  (cost=0.29..165.25 rows=0 width=0) (actual time=1.341..1.341 rows=0.00 loops=1)
+  Buffers: shared hit=6664
+  ->  Index Scan using trips_cancelled_requested_at_idx on trips  (cost=0.29..165.25 rows=3198 width=6) (actual time=0.013..0.659 rows=3165.00 loops=1)
+        Index Cond: (requested_at < ('2025-02-01 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+        Filter: (status ~~ 'CANCELLED%'::text)
+        Index Searches: 1
+        Buffers: shared hit=329
+Planning:
+  Buffers: shared hit=206
+Planning Time: 0.367 ms
+Trigger for constraint payments_trip_id_fkey: time=4.583 calls=3165
+Trigger for constraint ratings_trip_id_fkey: time=4.554 calls=3165
+Execution Time: 10.648 ms
+=== W05 run 3 ===
+Delete on trips  (cost=0.29..165.25 rows=0 width=0) (actual time=1.405..1.405 rows=0.00 loops=1)
+  Buffers: shared hit=6664
+  ->  Index Scan using trips_cancelled_requested_at_idx on trips  (cost=0.29..165.25 rows=3198 width=6) (actual time=0.015..0.683 rows=3165.00 loops=1)
+        Index Cond: (requested_at < ('2025-02-01 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+        Filter: (status ~~ 'CANCELLED%'::text)
+        Index Searches: 1
+        Buffers: shared hit=329
+Planning:
+  Buffers: shared hit=206
+Planning Time: 0.405 ms
+Trigger for constraint payments_trip_id_fkey: time=4.649 calls=3165
+Trigger for constraint ratings_trip_id_fkey: time=4.684 calls=3165
+Execution Time: 10.918 ms

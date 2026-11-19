@@ -1,0 +1,63 @@
+=== R24 run 1 ===
+Limit  (cost=9025.79..9037.43 rows=100 width=22) (actual time=10.063..10.945 rows=100.00 loops=1)
+  Buffers: shared hit=5869
+  ->  Gather Merge  (cost=9025.79..9342.23 rows=2717 width=22) (actual time=10.062..10.934 rows=100.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=5869
+        ->  Sort  (cost=8025.76..8028.59 rows=1132 width=22) (actual time=8.674..8.676 rows=81.00 loops=3)
+              Sort Key: fare_amount DESC
+              Sort Method: top-N heapsort  Memory: 37kB
+              Buffers: shared hit=5869
+              Worker 0:  Sort Method: top-N heapsort  Memory: 36kB
+              Worker 1:  Sort Method: top-N heapsort  Memory: 36kB
+              ->  Parallel Seq Scan on trips  (cost=0.00..7982.50 rows=1132 width=22) (actual time=0.010..8.479 rows=1020.00 loops=3)
+                    Filter: ((status = 'COMPLETED'::text) AND ((distance_km > '43'::numeric) OR (duration_min > 150)))
+                    Rows Removed by Filter: 98980
+                    Buffers: shared hit=5795
+Planning:
+  Buffers: shared hit=266
+Planning Time: 0.433 ms
+Execution Time: 10.964 ms
+=== R24 run 2 ===
+Limit  (cost=9025.79..9037.43 rows=100 width=22) (actual time=11.025..11.946 rows=100.00 loops=1)
+  Buffers: shared hit=5869
+  ->  Gather Merge  (cost=9025.79..9342.23 rows=2717 width=22) (actual time=11.024..11.940 rows=100.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=5869
+        ->  Sort  (cost=8025.76..8028.59 rows=1132 width=22) (actual time=9.483..9.488 rows=83.00 loops=3)
+              Sort Key: fare_amount DESC
+              Sort Method: top-N heapsort  Memory: 37kB
+              Buffers: shared hit=5869
+              Worker 0:  Sort Method: top-N heapsort  Memory: 36kB
+              Worker 1:  Sort Method: top-N heapsort  Memory: 37kB
+              ->  Parallel Seq Scan on trips  (cost=0.00..7982.50 rows=1132 width=22) (actual time=0.013..9.280 rows=1020.00 loops=3)
+                    Filter: ((status = 'COMPLETED'::text) AND ((distance_km > '43'::numeric) OR (duration_min > 150)))
+                    Rows Removed by Filter: 98980
+                    Buffers: shared hit=5795
+Planning:
+  Buffers: shared hit=266
+Planning Time: 0.415 ms
+Execution Time: 11.972 ms
+=== R24 run 3 ===
+Limit  (cost=9025.79..9037.43 rows=100 width=22) (actual time=10.436..11.260 rows=100.00 loops=1)
+  Buffers: shared hit=5869
+  ->  Gather Merge  (cost=9025.79..9342.23 rows=2717 width=22) (actual time=10.436..11.244 rows=100.00 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        Buffers: shared hit=5869
+        ->  Sort  (cost=8025.76..8028.59 rows=1132 width=22) (actual time=9.082..9.084 rows=79.67 loops=3)
+              Sort Key: fare_amount DESC
+              Sort Method: top-N heapsort  Memory: 36kB
+              Buffers: shared hit=5869
+              Worker 0:  Sort Method: top-N heapsort  Memory: 36kB
+              Worker 1:  Sort Method: top-N heapsort  Memory: 36kB
+              ->  Parallel Seq Scan on trips  (cost=0.00..7982.50 rows=1132 width=22) (actual time=0.011..8.877 rows=1020.00 loops=3)
+                    Filter: ((status = 'COMPLETED'::text) AND ((distance_km > '43'::numeric) OR (duration_min > 150)))
+                    Rows Removed by Filter: 98980
+                    Buffers: shared hit=5795
+Planning:
+  Buffers: shared hit=266
+Planning Time: 0.428 ms
+Execution Time: 11.291 ms

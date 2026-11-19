@@ -1,0 +1,30 @@
+=== R16 run 1 ===
+Limit  (cost=9103.09..9104.23 rows=25 width=41) (actual time=29.277..29.279 rows=25.00 loops=1)
+  Buffers: shared hit=4303
+  ->  Index Scan Backward using trips_pkey on trips  (cost=0.42..13654.42 rows=300000 width=41) (actual time=0.025..26.012 rows=200025.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=4303
+Planning:
+  Buffers: shared hit=221
+Planning Time: 0.368 ms
+Execution Time: 29.293 ms
+=== R16 run 2 ===
+Limit  (cost=9103.09..9104.23 rows=25 width=41) (actual time=20.250..20.252 rows=25.00 loops=1)
+  Buffers: shared hit=4303
+  ->  Index Scan Backward using trips_pkey on trips  (cost=0.42..13654.42 rows=300000 width=41) (actual time=0.024..17.163 rows=200025.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=4303
+Planning:
+  Buffers: shared hit=221
+Planning Time: 0.362 ms
+Execution Time: 20.266 ms
+=== R16 run 3 ===
+Limit  (cost=9103.09..9104.23 rows=25 width=41) (actual time=20.814..20.816 rows=25.00 loops=1)
+  Buffers: shared hit=4303
+  ->  Index Scan Backward using trips_pkey on trips  (cost=0.42..13654.42 rows=300000 width=41) (actual time=0.024..17.613 rows=200025.00 loops=1)
+        Index Searches: 1
+        Buffers: shared hit=4303
+Planning:
+  Buffers: shared hit=221
+Planning Time: 0.379 ms
+Execution Time: 20.829 ms

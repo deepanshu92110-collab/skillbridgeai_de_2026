@@ -1,0 +1,45 @@
+=== R13 run 1 ===
+Limit  (cost=758.03..758.16 rows=50 width=27) (actual time=9.381..9.384 rows=50.00 loops=1)
+  Buffers: shared hit=376
+  ->  Sort  (cost=758.03..758.79 rows=302 width=27) (actual time=9.381..9.382 rows=50.00 loops=1)
+        Sort Key: full_name
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=376
+        ->  Seq Scan on riders  (cost=0.00..748.00 rows=302 width=27) (actual time=0.004..9.224 rows=1500.00 loops=1)
+              Filter: (full_name ~~* '%sharma%'::text)
+              Rows Removed by Filter: 28500
+              Buffers: shared hit=373
+Planning:
+  Buffers: shared hit=129
+Planning Time: 0.328 ms
+Execution Time: 9.394 ms
+=== R13 run 2 ===
+Limit  (cost=758.03..758.16 rows=50 width=27) (actual time=8.810..8.813 rows=50.00 loops=1)
+  Buffers: shared hit=376
+  ->  Sort  (cost=758.03..758.79 rows=302 width=27) (actual time=8.810..8.810 rows=50.00 loops=1)
+        Sort Key: full_name
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=376
+        ->  Seq Scan on riders  (cost=0.00..748.00 rows=302 width=27) (actual time=0.004..8.665 rows=1500.00 loops=1)
+              Filter: (full_name ~~* '%sharma%'::text)
+              Rows Removed by Filter: 28500
+              Buffers: shared hit=373
+Planning:
+  Buffers: shared hit=129
+Planning Time: 0.311 ms
+Execution Time: 8.823 ms
+=== R13 run 3 ===
+Limit  (cost=758.03..758.16 rows=50 width=27) (actual time=8.856..8.859 rows=50.00 loops=1)
+  Buffers: shared hit=376
+  ->  Sort  (cost=758.03..758.79 rows=302 width=27) (actual time=8.856..8.857 rows=50.00 loops=1)
+        Sort Key: full_name
+        Sort Method: top-N heapsort  Memory: 30kB
+        Buffers: shared hit=376
+        ->  Seq Scan on riders  (cost=0.00..748.00 rows=302 width=27) (actual time=0.003..8.710 rows=1500.00 loops=1)
+              Filter: (full_name ~~* '%sharma%'::text)
+              Rows Removed by Filter: 28500
+              Buffers: shared hit=373
+Planning:
+  Buffers: shared hit=129
+Planning Time: 0.298 ms
+Execution Time: 8.869 ms

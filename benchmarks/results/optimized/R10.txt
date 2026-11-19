@@ -1,0 +1,42 @@
+=== R10 run 1 ===
+Seq Scan on drivers d  (cost=4529.52..4611.52 rows=1354 width=20) (actual time=0.648..0.649 rows=0.00 loops=1)
+  Filter: ((NOT (ANY (driver_id = (hashed SubPlan 1).col1))) AND (status = 'ACTIVE'::text))
+  Rows Removed by Filter: 3000
+  Buffers: shared hit=114
+  SubPlan 1
+    ->  Index Scan using trips_requested_at_city_idx on trips t  (cost=0.43..4521.55 rows=3189 width=4) (actual time=0.008..0.225 rows=3296.00 loops=1)
+          Index Cond: (requested_at >= ('2026-06-25 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+          Index Searches: 1
+          Buffers: shared hit=77
+Planning:
+  Buffers: shared hit=268
+Planning Time: 0.533 ms
+Execution Time: 1.045 ms
+=== R10 run 2 ===
+Seq Scan on drivers d  (cost=4529.52..4611.52 rows=1354 width=20) (actual time=0.721..0.721 rows=0.00 loops=1)
+  Filter: ((NOT (ANY (driver_id = (hashed SubPlan 1).col1))) AND (status = 'ACTIVE'::text))
+  Rows Removed by Filter: 3000
+  Buffers: shared hit=114
+  SubPlan 1
+    ->  Index Scan using trips_requested_at_city_idx on trips t  (cost=0.43..4521.55 rows=3189 width=4) (actual time=0.006..0.242 rows=3296.00 loops=1)
+          Index Cond: (requested_at >= ('2026-06-25 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+          Index Searches: 1
+          Buffers: shared hit=77
+Planning:
+  Buffers: shared hit=268
+Planning Time: 0.518 ms
+Execution Time: 0.745 ms
+=== R10 run 3 ===
+Seq Scan on drivers d  (cost=4529.52..4611.52 rows=1354 width=20) (actual time=0.633..0.633 rows=0.00 loops=1)
+  Filter: ((NOT (ANY (driver_id = (hashed SubPlan 1).col1))) AND (status = 'ACTIVE'::text))
+  Rows Removed by Filter: 3000
+  Buffers: shared hit=114
+  SubPlan 1
+    ->  Index Scan using trips_requested_at_city_idx on trips t  (cost=0.43..4521.55 rows=3189 width=4) (actual time=0.006..0.217 rows=3296.00 loops=1)
+          Index Cond: (requested_at >= ('2026-06-25 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+          Index Searches: 1
+          Buffers: shared hit=77
+Planning:
+  Buffers: shared hit=268
+Planning Time: 0.491 ms
+Execution Time: 0.654 ms

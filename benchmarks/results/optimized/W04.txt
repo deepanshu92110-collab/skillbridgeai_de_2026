@@ -1,0 +1,33 @@
+=== W04 run 1 ===
+Insert on trips  (cost=0.00..137.50 rows=0 width=0) (actual time=17.854..17.854 rows=0.00 loops=1)
+  Buffers: shared hit=65282 read=1 dirtied=1303 written=136
+  ->  Function Scan on generate_series g  (cost=0.00..137.50 rows=5000 width=208) (actual time=0.118..0.682 rows=5000.00 loops=1)
+Planning Time: 0.060 ms
+Trigger for constraint trips_rider_id_fkey: time=10.737 calls=5000
+Trigger for constraint trips_driver_id_fkey: time=0.981 calls=5000
+Trigger for constraint trips_vehicle_id_fkey: time=0.909 calls=5000
+Trigger for constraint trips_city_id_fkey: time=7.802 calls=5000
+Trigger for constraint trips_promo_code_fkey: time=0.984 calls=5000
+Execution Time: 39.818 ms
+=== W04 run 2 ===
+Insert on trips  (cost=0.00..137.50 rows=0 width=0) (actual time=33.501..33.501 rows=0.00 loops=1)
+  Buffers: shared hit=77869 dirtied=99 written=99
+  ->  Function Scan on generate_series g  (cost=0.00..137.50 rows=5000 width=208) (actual time=0.108..0.676 rows=5000.00 loops=1)
+Planning Time: 0.059 ms
+Trigger for constraint trips_rider_id_fkey: time=12.884 calls=5000
+Trigger for constraint trips_driver_id_fkey: time=1.023 calls=5000
+Trigger for constraint trips_vehicle_id_fkey: time=0.918 calls=5000
+Trigger for constraint trips_city_id_fkey: time=7.924 calls=5000
+Trigger for constraint trips_promo_code_fkey: time=1.013 calls=5000
+Execution Time: 57.823 ms
+=== W04 run 3 ===
+Insert on trips  (cost=0.00..137.50 rows=0 width=0) (actual time=19.444..19.444 rows=0.00 loops=1)
+  Buffers: shared hit=77768 dirtied=80 written=80
+  ->  Function Scan on generate_series g  (cost=0.00..137.50 rows=5000 width=208) (actual time=0.105..0.658 rows=5000.00 loops=1)
+Planning Time: 0.056 ms
+Trigger for constraint trips_rider_id_fkey: time=9.557 calls=5000
+Trigger for constraint trips_driver_id_fkey: time=0.972 calls=5000
+Trigger for constraint trips_vehicle_id_fkey: time=0.896 calls=5000
+Trigger for constraint trips_city_id_fkey: time=7.750 calls=5000
+Trigger for constraint trips_promo_code_fkey: time=0.967 calls=5000
+Execution Time: 40.143 ms

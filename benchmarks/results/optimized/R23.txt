@@ -1,0 +1,60 @@
+=== R23 run 1 ===
+GroupAggregate  (cost=18296.35..20525.20 rows=99060 width=20) (actual time=35.623..42.349 rows=60.00 loops=1)
+  Group Key: city_id, (date_trunc('month'::text, requested_at))
+  Buffers: shared hit=2058 read=190, temp read=366 written=367
+  ->  Sort  (cost=18296.35..18544.00 rows=99060 width=16) (actual time=35.446..38.532 rows=99450.00 loops=1)
+        Sort Key: city_id, (date_trunc('month'::text, requested_at)), rider_id
+        Sort Method: external merge  Disk: 2928kB
+        Buffers: shared hit=2058 read=190, temp read=366 written=367
+        ->  Bitmap Heap Scan on trips  (cost=2300.14..10076.34 rows=99060 width=16) (actual time=2.104..12.676 rows=99450.00 loops=1)
+              Recheck Cond: (requested_at >= ('2026-01-01 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+              Heap Blocks: exact=1858
+              Buffers: shared hit=2052 read=190
+              ->  Bitmap Index Scan on trips_requested_at_city_idx  (cost=0.00..2275.38 rows=99060 width=0) (actual time=1.997..1.997 rows=99450.00 loops=1)
+                    Index Cond: (requested_at >= ('2026-01-01 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+                    Index Searches: 1
+                    Buffers: shared hit=194 read=190
+Planning:
+  Buffers: shared hit=239
+Planning Time: 0.396 ms
+Execution Time: 42.961 ms
+=== R23 run 2 ===
+GroupAggregate  (cost=18296.35..20525.20 rows=99060 width=20) (actual time=34.705..41.367 rows=60.00 loops=1)
+  Group Key: city_id, (date_trunc('month'::text, requested_at))
+  Buffers: shared hit=2248, temp read=366 written=367
+  ->  Sort  (cost=18296.35..18544.00 rows=99060 width=16) (actual time=34.521..37.585 rows=99450.00 loops=1)
+        Sort Key: city_id, (date_trunc('month'::text, requested_at)), rider_id
+        Sort Method: external merge  Disk: 2928kB
+        Buffers: shared hit=2248, temp read=366 written=367
+        ->  Bitmap Heap Scan on trips  (cost=2300.14..10076.34 rows=99060 width=16) (actual time=1.564..12.058 rows=99450.00 loops=1)
+              Recheck Cond: (requested_at >= ('2026-01-01 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+              Heap Blocks: exact=1858
+              Buffers: shared hit=2242
+              ->  Bitmap Index Scan on trips_requested_at_city_idx  (cost=0.00..2275.38 rows=99060 width=0) (actual time=1.458..1.458 rows=99450.00 loops=1)
+                    Index Cond: (requested_at >= ('2026-01-01 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+                    Index Searches: 1
+                    Buffers: shared hit=384
+Planning:
+  Buffers: shared hit=239
+Planning Time: 0.386 ms
+Execution Time: 42.191 ms
+=== R23 run 3 ===
+GroupAggregate  (cost=18296.35..20525.20 rows=99060 width=20) (actual time=35.846..42.372 rows=60.00 loops=1)
+  Group Key: city_id, (date_trunc('month'::text, requested_at))
+  Buffers: shared hit=2248, temp read=366 written=367
+  ->  Sort  (cost=18296.35..18544.00 rows=99060 width=16) (actual time=35.668..38.634 rows=99450.00 loops=1)
+        Sort Key: city_id, (date_trunc('month'::text, requested_at)), rider_id
+        Sort Method: external merge  Disk: 2928kB
+        Buffers: shared hit=2248, temp read=366 written=367
+        ->  Bitmap Heap Scan on trips  (cost=2300.14..10076.34 rows=99060 width=16) (actual time=1.548..12.144 rows=99450.00 loops=1)
+              Recheck Cond: (requested_at >= ('2026-01-01 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+              Heap Blocks: exact=1858
+              Buffers: shared hit=2242
+              ->  Bitmap Index Scan on trips_requested_at_city_idx  (cost=0.00..2275.38 rows=99060 width=0) (actual time=1.444..1.444 rows=99450.00 loops=1)
+                    Index Cond: (requested_at >= ('2026-01-01 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text)))
+                    Index Searches: 1
+                    Buffers: shared hit=384
+Planning:
+  Buffers: shared hit=239
+Planning Time: 0.396 ms
+Execution Time: 43.324 ms

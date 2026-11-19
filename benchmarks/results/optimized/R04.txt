@@ -1,0 +1,57 @@
+=== R04 run 1 ===
+Sort  (cost=109.89..110.01 rows=51 width=29) (actual time=0.126..0.129 rows=81.00 loops=1)
+  Sort Key: t.requested_at
+  Sort Method: quicksort  Memory: 28kB
+  Buffers: shared hit=28 read=6
+  ->  Nested Loop  (cost=0.43..108.44 rows=51 width=29) (actual time=0.051..0.110 rows=81.00 loops=1)
+        Buffers: shared hit=25 read=6
+        ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.003..0.004 rows=1.00 loops=1)
+              Filter: (city_name = 'Bengaluru'::text)
+              Rows Removed by Filter: 9
+              Buffers: shared hit=1
+        ->  Index Scan using trips_requested_at_city_idx on trips t  (cost=0.43..106.81 rows=51 width=33) (actual time=0.045..0.093 rows=81.00 loops=1)
+              Index Cond: ((requested_at >= ('2026-05-10 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text))) AND (requested_at < ('2026-05-11 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text))) AND (city_id = c.city_id))
+              Index Searches: 1
+              Buffers: shared hit=24 read=6
+Planning:
+  Buffers: shared hit=391 dirtied=1
+Planning Time: 0.812 ms
+Execution Time: 0.157 ms
+=== R04 run 2 ===
+Sort  (cost=109.89..110.01 rows=51 width=29) (actual time=0.093..0.095 rows=81.00 loops=1)
+  Sort Key: t.requested_at
+  Sort Method: quicksort  Memory: 28kB
+  Buffers: shared hit=34
+  ->  Nested Loop  (cost=0.43..108.44 rows=51 width=29) (actual time=0.027..0.077 rows=81.00 loops=1)
+        Buffers: shared hit=31
+        ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.003..0.004 rows=1.00 loops=1)
+              Filter: (city_name = 'Bengaluru'::text)
+              Rows Removed by Filter: 9
+              Buffers: shared hit=1
+        ->  Index Scan using trips_requested_at_city_idx on trips t  (cost=0.43..106.81 rows=51 width=33) (actual time=0.021..0.060 rows=81.00 loops=1)
+              Index Cond: ((requested_at >= ('2026-05-10 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text))) AND (requested_at < ('2026-05-11 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text))) AND (city_id = c.city_id))
+              Index Searches: 1
+              Buffers: shared hit=30
+Planning:
+  Buffers: shared hit=391
+Planning Time: 0.674 ms
+Execution Time: 0.123 ms
+=== R04 run 3 ===
+Sort  (cost=109.89..110.01 rows=51 width=29) (actual time=0.069..0.071 rows=81.00 loops=1)
+  Sort Key: t.requested_at
+  Sort Method: quicksort  Memory: 28kB
+  Buffers: shared hit=34
+  ->  Nested Loop  (cost=0.43..108.44 rows=51 width=29) (actual time=0.019..0.057 rows=81.00 loops=1)
+        Buffers: shared hit=31
+        ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.002..0.003 rows=1.00 loops=1)
+              Filter: (city_name = 'Bengaluru'::text)
+              Rows Removed by Filter: 9
+              Buffers: shared hit=1
+        ->  Index Scan using trips_requested_at_city_idx on trips t  (cost=0.43..106.81 rows=51 width=33) (actual time=0.015..0.045 rows=81.00 loops=1)
+              Index Cond: ((requested_at >= ('2026-05-10 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text))) AND (requested_at < ('2026-05-11 00:00:00'::timestamp without time zone AT TIME ZONE current_setting('TimeZone'::text))) AND (city_id = c.city_id))
+              Index Searches: 1
+              Buffers: shared hit=30
+Planning:
+  Buffers: shared hit=391
+Planning Time: 0.571 ms
+Execution Time: 0.093 ms
